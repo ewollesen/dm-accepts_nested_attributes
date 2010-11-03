@@ -68,6 +68,11 @@ module DataMapper
           send("assign_nested_attributes_for_related_#{type}", relationship, attributes)
         end
 
+        relationship.child_model.class_eval do
+          def _delete
+            # no op
+          end
+        end
       end
 
       def options_for_nested_attributes
